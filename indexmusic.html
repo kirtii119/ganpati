@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ganpati AR</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body { text-align: center; background: #fdf6e3; font-family: sans-serif; }
+    h2 { margin: 10px; }
+    #musicBtn {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #ff7043;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h2>🙏 Ganpati Bappa Morya 🙏</h2>
+
+  <!-- AR Model -->
+  <model-viewer src="com3.glb"
+                ar
+                ar-modes="webxr scene-viewer quick-look"
+                camera-controls
+                auto-rotate
+                style="width: 100%; height: 500px;">
+  </model-viewer>
+
+  <p>📱 Scan this on your phone to see Ganpati in your room</p>
+
+  <!-- Music -->
+  <audio id="bgMusic" src="song.mp3" loop autoplay></audio>
+  <button id="musicBtn">🔊 Play Music</button>
+
+  <script>
+    const music = document.getElementById("bgMusic");
+    const btn = document.getElementById("musicBtn");
+
+    // Try autoplay
+    music.play().then(() => {
+      btn.style.display = "none"; // Hide button if autoplay worked
+    }).catch(() => {
+      btn.style.display = "inline-block"; // Show button if blocked
+    });
+
+    // Play on user click
+    btn.addEventListener("click", () => {
+      music.play();
+      btn.style.display = "none";
+    });
+  </script>
+</body>
+</html>
